@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,23 +7,32 @@
     <title>Iniciar sesión</title>
 </head>
 <body>
-    <div class="bg-gray-900 w-full h-dvh flex">
+    <div class="bg-slate-900 w-full h-dvh flex">
         <!--Iniciar sesion-->
         <div class="bg-white w-lg mx-auto my-auto rounded-md px-10 py-10">
             <img src="../../src/img/logo.png" alt="Logo software"
             class="w-80 mx-auto">
             <div class="">
-                <h1 class="text-3xl font-medium text-center">Iniciar sesión</h1>
+                <h1 class="text-4xl font-medium text-center text-green-500">Iniciar sesión</h1>
                 <!--formulario-->
                 <form action="">
-                    <label for="usuario" class="block">Usuario</label>
-                    <input type="text" required placeholder="Ingrese su usario"
-                    class="w-full">
-                    <label for="contraseña" class="block">Contraseña</label>
+
+                    <label for="correo" class="block mb-1 font-semibold">Email</label>
+                    <input type="email" required placeholder="tu@email.com"
+                    class="w-full mb-4 bg-gray-100 rounded-md
+                    px-3 py-2">
+
+                    <label for="contraseña" class="block mb-1 font-semibold">Contraseña</label>
                     <input type="password" required placeholder="Ingrese su contraseña"
-                    class="w-full">
+                    class="w-full mb-4 bg-gray-100 rounded-md
+                    px-3 py-2">
+
+                    <div class="text-end">
+                        <a href="" class="text-sm font-semibold underline hover:text-green-500">¿Olvidaste tu contraseña?</a>
+                    </div>
                     <div class="text-center mt-6">
-                        <button class="bg-green-600 px-2 py-2 w-80">Ingresar</button>
+                        <button class="bg-green-600 px-2 py-2 w-80 rounded-md text-white hover:font-semibold
+                        hover:cursor-pointer hover:bg-green-700">Ingresar</button>
                     </div>
                 </form>
             </div>
