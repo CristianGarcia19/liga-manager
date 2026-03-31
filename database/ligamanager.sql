@@ -21,7 +21,7 @@ SET @@SESSION.SQL_LOG_BIN= 0;
 -- GTID state at the beginning of the backup 
 --
 
-SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'ac94a755-18ff-11f1-bb1e-1cbfc07daf84:1-126';
+SET @@GLOBAL.GTID_PURGED=/*!80000 '+'*/ 'ac94a755-18ff-11f1-bb1e-1cbfc07daf84:1-209';
 
 --
 -- Table structure for table `arbitros`
@@ -272,6 +272,30 @@ LOCK TABLES `equipos_jugadores` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `estado_partidos`
+--
+
+DROP TABLE IF EXISTS `estado_partidos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `estado_partidos` (
+  `id_estado_partido` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id_estado_partido`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `estado_partidos`
+--
+
+LOCK TABLES `estado_partidos` WRITE;
+/*!40000 ALTER TABLE `estado_partidos` DISABLE KEYS */;
+INSERT INTO `estado_partidos` VALUES (1,'Programado'),(2,'Finalizado'),(3,'Aplazado'),(4,'Cancelado');
+/*!40000 ALTER TABLE `estado_partidos` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `incidencias`
 --
 
@@ -280,9 +304,9 @@ DROP TABLE IF EXISTS `incidencias`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `incidencias` (
   `id_incidencia` int NOT NULL AUTO_INCREMENT,
-  `nombre` enum('Gol','Autogol','Tarjeta amarilla','Tarjeta roja') NOT NULL,
+  `nombre` varchar(255) NOT NULL,
   PRIMARY KEY (`id_incidencia`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -291,6 +315,7 @@ CREATE TABLE `incidencias` (
 
 LOCK TABLES `incidencias` WRITE;
 /*!40000 ALTER TABLE `incidencias` DISABLE KEYS */;
+INSERT INTO `incidencias` VALUES (1,'Gol'),(2,'Autogol'),(3,'Tarjeta amarilla'),(4,'Tarjeta roja');
 /*!40000 ALTER TABLE `incidencias` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -372,7 +397,7 @@ CREATE TABLE `partidos` (
   `fecha_partido` date DEFAULT NULL,
   `hora_partido` time DEFAULT NULL,
   `id_cancha` int DEFAULT NULL,
-  `estado` enum('Programado','Finalizado','Aplazado','Cancelado') DEFAULT 'Programado',
+  `id_estado_partido` int DEFAULT NULL,
   `id_categoria` int DEFAULT NULL,
   `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
   `fecha_modificacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -380,11 +405,13 @@ CREATE TABLE `partidos` (
   KEY `equipo_local` (`equipo_local`),
   KEY `equipo_visitante` (`equipo_visitante`),
   KEY `id_cancha` (`id_cancha`),
+  KEY `id_estado_partido` (`id_estado_partido`),
   KEY `id_categoria` (`id_categoria`),
   CONSTRAINT `partidos_ibfk_1` FOREIGN KEY (`equipo_local`) REFERENCES `equipos` (`id_equipo`),
   CONSTRAINT `partidos_ibfk_2` FOREIGN KEY (`equipo_visitante`) REFERENCES `equipos` (`id_equipo`),
   CONSTRAINT `partidos_ibfk_3` FOREIGN KEY (`id_cancha`) REFERENCES `canchas` (`id_cancha`),
-  CONSTRAINT `partidos_ibfk_4` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`)
+  CONSTRAINT `partidos_ibfk_4` FOREIGN KEY (`id_estado_partido`) REFERENCES `estado_partidos` (`id_estado_partido`),
+  CONSTRAINT `partidos_ibfk_5` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -433,7 +460,7 @@ CREATE TABLE `roles_arbitrales` (
   `id_rol` int NOT NULL AUTO_INCREMENT,
   `nombre` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id_rol`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -442,6 +469,7 @@ CREATE TABLE `roles_arbitrales` (
 
 LOCK TABLES `roles_arbitrales` WRITE;
 /*!40000 ALTER TABLE `roles_arbitrales` DISABLE KEYS */;
+INSERT INTO `roles_arbitrales` VALUES (1,'Arbitro'),(2,'Asistente 1'),(3,'Asistente 2');
 /*!40000 ALTER TABLE `roles_arbitrales` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -468,6 +496,39 @@ LOCK TABLES `torneos` WRITE;
 /*!40000 ALTER TABLE `torneos` DISABLE KEYS */;
 /*!40000 ALTER TABLE `torneos` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `usuarios`
+--
+
+DROP TABLE IF EXISTS `usuarios`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `usuarios` (
+  `id_usuario` int NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(255) NOT NULL,
+  `apellido_paterno` varchar(255) DEFAULT NULL,
+  `apellido_materno` varchar(255) DEFAULT NULL,
+  `telefono` int DEFAULT NULL,
+  `correo` varchar(255) DEFAULT NULL,
+  `contraseña` varchar(255) NOT NULL,
+  `id_rol` int NOT NULL,
+  `fecha_creacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `fecha_actualizacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_usuario`),
+  KEY `id_rol` (`id_rol`),
+  CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_rol`) REFERENCES `roles_administrativos` (`id_rol`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `usuarios`
+--
+
+LOCK TABLES `usuarios` WRITE;
+/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
+/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
+UNLOCK TABLES;
 SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -479,4 +540,4 @@ SET @@SESSION.SQL_LOG_BIN = @MYSQLDUMP_TEMP_LOG_BIN;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2026-03-17 20:24:44
+-- Dump completed on 2026-03-30 20:24:59
