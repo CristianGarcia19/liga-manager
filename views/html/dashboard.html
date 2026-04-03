@@ -9,16 +9,57 @@
     <title>Dasboard</title>
 </head>
 <body>
-    <div class="bg-slate-900 w-full h-dvh">
+    <div class="bg-slate-950 w-full h-dvh">
         <!--aside-->
-        <div class="flex justify-between">
-            <div class="w-full h-12 flex items-center justify-center">
-                <h1 class="text-white text-lg font-semibold">LigaManager</h1>
+        <aside class="h-dvh w-68 bg-slate-900 px-4 py-4">
+            <div class="flex justify-center items-center gap-4 mb-8">
+                <div>
+                    <img src="../../src/img/logo.png" alt="logo" class="w-10">
+                </div>
+                <div>
+                    <p class="text-white text-lg">Liga Manager</p>
+                </div>
             </div>
-            <aside class="bg-slate-800 px-2 py-2 h-12 w-16 rounded-bl-sm">
-                <img src="../../src/img/icons/menu.svg" alt="logo" class="w-full h-full">
-            </aside>
-        </div>
+
+
+            <!--menu opciones-->
+            <div class="gap-1 flex flex-col">
+
+                <!--perfil-->
+                <a href="#" class="flex text-white px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/man.svg" alt="man">   
+                    Perfil
+                </a>
+                
+                <!--partidos-->
+                <div class="text-white flex items-center px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/ball.svg" alt="ball">
+                    <button class="flex" onclick="desplegarMenu()">Partidos <img src="../../src/img/icons/arrow_drop_down.svg" alt="" class="fill-current"></button>
+
+                    <!--dropdown menu-->
+                    <div id="dropDownMenu" class="absolute left-8 mt-44 hidden">
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Lista de Partidos</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Crear partido</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Editar Partido</a>
+                    </div>
+                </div>
+
+                <!--jugadores-->
+                <div class="text-white flex items-center px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/players.svg" alt="players">
+                    <button class="flex" onclick="desplegarMenu()">Jugadores <img src="../../src/img/icons/arrow_drop_down.svg" alt="" class="fill-current"></button>
+
+                    <!--dropdown menu-->
+                    <div id="dropDownMenu" class="absolute left-8 mt-44 hidden">
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Lista de Partidos</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Crear partido</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Editar Partido</a>
+                    </div>
+                </div>
+            </div>
+        </aside>
     </div>
+    <!--scripts-->
+    <script src="../../src/js/dashboard.js"></script>
 </body>
 </html>
