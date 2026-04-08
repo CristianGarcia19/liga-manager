@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../src/css/style.css">
+    <!--favicon-->
+    <link rel="icon" type="image/png" href="../../src/img/logo.png">
+    <title>Perfil</title>
+</head>
+<body>
+    <div class="bg-slate-950 w-full h-dvh flex">
+        <!--aside-->
+        <div class="h-dvh w-68 bg-slate-900 px-4 py-4">
+            <div class="flex justify-center items-center gap-4 mb-8">
+                <div>
+                    <img src="../../src/img/logo.png" alt="logo" class="w-10">
+                </div>
+                <div>
+                    <p class="text-white text-lg">Liga Manager</p>
+                </div>
+            </div>
+
+
+            <!--menu opciones-->
+            <nav class="gap-1 flex flex-col">
+
+                <!--perfil-->
+                <a href="#" class="flex text-white px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/man.svg" alt="man">   
+                    Perfil
+                </a>
+                
+                <!--partidos-->
+                <div class="text-white flex items-center px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/ball.svg" alt="ball">
+                    <button class="flex" onclick="desplegarMenu()">Partidos <img src="../../src/img/icons/arrow_drop_down.svg" alt="" class="fill-current"></button>
+
+                    <!--dropdown menu-->
+                    <div id="dropDownMenu" class="absolute left-8 mt-44 hidden">
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Lista de Partidos</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Crear partido</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Editar Partido</a>
+                    </div>
+                </div>
+
+                <!--jugadores-->
+                <div class="text-white flex items-center px-2 py-2 gap-2 hover:bg-slate-700 hover:rounded">
+                    <img src="../../src/img/icons/players.svg" alt="players">
+                    <button class="flex" onclick="desplegarMenu()">Jugadores <img src="../../src/img/icons/arrow_drop_down.svg" alt="" class="fill-current"></button>
+
+                    <!--dropdown menu-->
+                    <div id="dropDownMenu" class="absolute left-8 mt-44 hidden">
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Lista de Partidos</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Crear partido</a>
+                        <a href="#" class="block px-2 py-2 hover:bg-slate-700 hover:rounded w-full">Editar Partido</a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <!--main-->
+        <div class="text-white px-7 py-7 w-full">
+            <div class="mb-4">
+                <h1 class="font-bold text-2xl">Perfil</h1>
+            </div>
+            <div class="bg-gray-800 border border-gray-700 rounded p-4">
+                <p class="text-xl font-semibold">Perfil</p>
+                <div class="border border-gray-700 rounded p-4 mt-4">
+                    <h2 class="text-lg font-bold mb-2">Información personal</h2>
+
+                    <div class="grid grid-cols-3 gap-6">
+                        <div class="col-span-1">
+                            <p class="text-sm text-gray-400 font-semibold
+                            ">Nombre</p>
+                            <p class="font-medium">Cristian Camilo</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-semibold">Primer apellido</p>
+                            <p>Garcia</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-semibold">Segundo apellido</p>
+                            <p>Zarta</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-semibold">Correo</p>
+                            <p>cristian.gz1914@gmail.com</p>
+                        </div>
+                        <div>
+                            <p class="text-sm text-gray-400 font-semibold">Telefono</p>
+                            <p>3104061452</p>
+                        </div>
+                        <button 
+                        class="bg-gray-700 flex justify-center items-center
+                        col-span-3 py-3 gap-2 text-gray-400 rounded-4xl
+                        border border-gray-600 hover:cursor-pointer hover:text-white
+                        hover:bg-slate-700">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L6.832 19.82a4.5 4.5 0 0 1-1.897 1.13l-2.685.8.8-2.685a4.5 4.5 0 0 1 1.13-1.897L16.863 4.487Zm0 0L19.5 7.125" />
+                            </svg>
+                            Editar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--scripts-->
+    <script src="../../src/js/dashboard.js"></script>
+</body>
+</html>
